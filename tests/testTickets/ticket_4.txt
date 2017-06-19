@@ -1,0 +1,18 @@
+﻿-----Original Message-----
+From:  (DEER PARK ROAD CORP) [] 
+Sent: Tuesday, July 30, 2013 10:04 AM
+To: Test
+Subject: * VCON TICKET *
+
+                       * VCON TICKET *                          
+TRADER: STSPF                                   CUSIP: 123456789
+BUYS:       1,750,000 of AABST 2004-1 B2      3.19003%  04/25/34
+PRICE:  12.3450000 assuming CPR=  8.0   YTM: 195.233  AL= 1.48YR
+SETTLE: 08/02/13 [Fri]   Accrual Pd: 07/25/13 - 08/25/13 Monthly
+                           Next Payment: 08/26/13 ( 0 day delay)
+** Curr Face    $      410,910.69 <Jul13  Factor   0.2348061100>
+PRINCIPAL VAL   $      113,514.08                               
++  8 Days ACC   $          291.29 ✓ actual current coupon       
+= TOTAL FUNDS   $      113,805.37 **                            
+< TRADE NOTES: MAN; SUBPRIME MEZZ TRIGGER PLAY, SUBPRIME, P    >
+< &I, YTM=12%, RETURN OF PRIN=20%                              >

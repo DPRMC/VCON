@@ -1,0 +1,16 @@
+From:	Test, DEER PARK ROAD CORP [test@test.com]
+Sent:	Thursday, May 27, 2010 11:25 AM
+To:	Test
+Subject:	                       * TRADE TICKET *                         
+
+                       * TRADE TICKET *                         
+TRADER: STSPF                                   CUSIP: 123123123
+SELLS:        130,000 of BALTA 2006-3 22A1    5.64522%  05/25/36
+PRICE:  89.9000000 assuming CPR= 18.0   YTM:  32.082  AL= 4.84YR
+SETTLE: 05/11/10 [Tue]   Accrual Pd: 05/01/10 - 05/31/10 Monthly
+                           Next Payment: 06/25/10 (24 day delay)
+** Curr Face    $       67,528.40 <May10  Factor   0.5194492600>
+PRINCIPAL VAL   $       30,387.78                               
++ 10 Days ACC   $          105.89 !ASSUMED: May10 coupon unknown
+= TOTAL FUNDS   $       30,493.67 **                            
+< TRADE NOTES: REBOOK                                          >

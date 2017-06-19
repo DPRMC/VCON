@@ -1,0 +1,19 @@
+-----Original Message-----
+From: John Doe (DEER PARK ROAD CORP) [mailto:jdoe@example.com]
+Sent: Tuesday, January 20, 2015 1:18 PM
+To: John Doe
+Subject: * VCON TICKET *
+
+                       * VCON TICKET *
+TRADER: ABCPF                                   CUSIP: 00430BCA1
+BUYS:       1,234,000 of BUBBA 2008-2B C       0.00%  12/13/62
+PRICE:    .1234567 assuming CPR=   .0   YTM: *******  AL= 1.01YR
+SETTLE: 01/23/15 [Fri]   Accrual Pd: 11/24/14 - 02/22/15 Qrtrly
+                           Next Payment: 02/23/15 ( 0 day delay)
+** Curr Face    $    1,123,456.78 <Nov14  Factor   0.9996246086>
+PRINCIPAL VAL   $       12,345.67
++ 60 Days ACC   $          0.00 ✓ actual current coupon
+= TOTAL FUNDS   $       12,345.67 **
+< TRADE NOTES: RBS; CMBS, CRE-CDO, IO, NO RETURN OF PRINCIP    >
+< AL, YTM=1%; TRADES FLAT AND CARRIES FLAT, TOTAL PROCEEDS WIL >
+< L BE 12,345.30                                               >

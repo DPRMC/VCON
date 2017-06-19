@@ -1,0 +1,16 @@
+-----Original Message-----
+From: Test (DEER PARK ROAD CORP) [mailto:test@test.net] 
+Sent: Friday, October 16, 2015 12:21 PM
+Subject: * VCON TICKET *
+
+                       * VCON TICKET *                          
+TRADER: STSPF                                   CUSIP: 987654321
+BUYS:          63,000 of MLCFC 2006-4 C         5.324%  12/12/49
+PRICE:  12.3000000 assuming CPY=   .0   YTM:  32.947  AL= 1.14YR
+SETTLE: 10/21/15 [Wed]   Accrual Pd: 10/01/15 - 10/31/15 Monthly
+                           Next Payment: 11/12/15 (11 day delay)
+                                                                
+PRINCIPAL VAL   $       47,565.00                               
++ 20 Days ACC   $          186.34 !ASSUMED: Oct15 coupon unknown
+= TOTAL FUNDS   $       47,751.34 **                            
+< TRADE NOTES: CITI: ADD-ON                                    >

@@ -1,0 +1,16 @@
+{
+    "name": "dprmc/vcon",
+    "description": "A php library to parse and store VCON tickets.",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Drennen",
+            "email": "mdrennen@deerparkrd.com"
+        }
+    ],
+    "require": {}
+}
