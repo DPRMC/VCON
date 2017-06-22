@@ -32,27 +32,47 @@ class VCONTicketParserTest extends TestCase {
     }
 
     public function testParseFactor() {
-        $index = 0;
+        $ticketIndex = 0;
         $factorForIndex = 0.9996246086;
-        $text = $this->ticketTexts[ $index ];
-
+        $text = $this->ticketTexts[ $ticketIndex ];
         $ticketParser = new VCONTicketParser();
         $ticket = $ticketParser->parse( $text );
-
         $this->assertEquals( $factorForIndex, $ticket->factor );
-
     }
 
     public function testMissingFactor() {
-        $index = 2;
+        $ticketIndex = 2;
         $factorForIndex = NULL;
-        $text = $this->ticketTexts[ $index ];
-
+        $text = $this->ticketTexts[ $ticketIndex ];
         $ticketParser = new VCONTicketParser();
         $ticket = $ticketParser->parse( $text );
-
         $this->assertEquals( $factorForIndex, $ticket->factor );
+    }
 
+    /**
+     *
+     */
+    public function testParseTrader() {
+        $ticketIndex = 0;
+        $traderForIndex = 'JOE S';
+        $text = $this->ticketTexts[ $ticketIndex ];
+        $ticketParser = new VCONTicketParser();
+        $ticket = $ticketParser->parse( $text );
+        var_dump($text);
+        $this->assertEquals( $traderForIndex, $ticket->trader );
+    }
+
+    /**
+     *
+     */
+    public function testParseCusip() {
+        $ticketIndex = 0;
+        $cusipForIndex = '00430BCA1';
+        $text = $this->ticketTexts[ $ticketIndex ];
+        $ticketParser = new VCONTicketParser();
+        $ticket = $ticketParser->parse( $text );
+        $ticket = $ticketParser->parse( $text );
+        $this->assertEquals( $cusipForIndex, $ticket->cusip );
     }
 
 

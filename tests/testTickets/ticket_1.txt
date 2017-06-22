@@ -5,7 +5,7 @@ To: John Doe
 Subject: * VCON TICKET *
 
                        * VCON TICKET *
-TRADER: ABCPF                                   CUSIP: 00430BCA1
+TRADER: JOE S                                   CUSIP: 00430BCA1
 BUYS:       1,234,000 of BUBBA 2008-2B C       0.00%  12/13/62
 PRICE:    .1234567 assuming CPR=   .0   YTM: *******  AL= 1.01YR
 SETTLE: 01/23/15 [Fri]   Accrual Pd: 11/24/14 - 02/22/15 Qrtrly
