@@ -1,5 +1,7 @@
 .idea/
 vendor/
+.gitignore
+composer.lock
 node_modules/
 npm-debug.log
 

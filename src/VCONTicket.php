@@ -8,6 +8,8 @@ class VCONTicket{
     const IDENTIFIER_TYPE_CUSIP = 'CUSIP';
     const IDENTIFIER_TYPE_ISIN = 'ISIN';
 
+    public $rawText;
+
     public $identifier;
     public $identifierType;
 

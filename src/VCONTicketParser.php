@@ -26,6 +26,7 @@ class VCONTicketParser{
     public function parse($vconText){
         $this->text = $vconText; // Not sure I need to save this as a property.
         $vconTicket = new VCONTicket();
+        $vconTicket->rawText = $vconText;
 
         $vconTicket->factor = $this->parseFactor($vconText);
         if($vconTicket->cusip !== false){
@@ -115,6 +116,8 @@ class VCONTicketParser{
         }
         // http://php.net/manual/en/function.preg-match.php
         $quantity = $matches[1];
+        // @todo Return the number as a float instead of a string.
+        //$numberOfDecimalPlaces = strlen(explode('.',$quantity)[1]);
         return (string)$quantity;
     }
 
