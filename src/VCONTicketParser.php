@@ -81,7 +81,7 @@ class VCONTicketParser{
      * @throws Exception
      */
     protected function parseCusip($text){
-        $pattern = '/CUSIP: (.*)\n/';
+        $pattern = '/CUSIP:\s*(.*)\s*\n/';
         preg_match($pattern,$text,$matches);
         if(sizeof($matches) != 2 ){
             throw new Exception("parseCusip() failed because it didn't find a CUSIP. (Or found too many...)");
