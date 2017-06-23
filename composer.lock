@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "aef983f49d7631bbb327cc2c75601383",
+    "content-hash": "36fdbc2949e97d771a9b3279b7842083",
     "packages": [
+        {
+            "name": "dprmc/cusip",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DPRMC/CUSIP.git",
+                "reference": "7aef2ddbd247981b9e814cbbe8bd5ff7b82045e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DPRMC/CUSIP/zipball/7aef2ddbd247981b9e814cbbe8bd5ff7b82045e8",
+                "reference": "7aef2ddbd247981b9e814cbbe8bd5ff7b82045e8",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Drennen",
+                    "email": "mdrennen@deerparkrd.com"
+                }
+            ],
+            "description": "A php library for validating CUSIP codes.",
+            "time": "2017-04-26T16:28:49+00:00"
+        },
         {
             "name": "nesbot/carbon",
             "version": "1.22.1",

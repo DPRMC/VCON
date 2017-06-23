@@ -13,7 +13,8 @@
         }
     ],
     "require": {
-        "nesbot/carbon": "^1.22"
+        "nesbot/carbon": "^1.22",
+        "dprmc/cusip": "^1.0"
     },
     "autoload": {
         "classmap": [

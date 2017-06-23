@@ -5,6 +5,12 @@ use Carbon\Carbon;
 
 class VCONTicket{
 
+    const IDENTIFIER_TYPE_CUSIP = 'CUSIP';
+    const IDENTIFIER_TYPE_ISIN = 'ISIN';
+
+    public $identifier;
+    public $identifierType;
+
     public $trader;
     public $cusip;
     public $quantity;
