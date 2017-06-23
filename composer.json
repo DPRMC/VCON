@@ -12,7 +12,9 @@
             "email": "mdrennen@deerparkrd.com"
         }
     ],
-    "require": {},
+    "require": {
+        "nesbot/carbon": "^1.22"
+    },
     "autoload": {
         "classmap": [
             "src/"

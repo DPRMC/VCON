@@ -4,6 +4,7 @@ namespace DPRMC\VCON;
 
 use PHPUnit\Framework\TestCase;
 use DPRMC\VCON\VCONTicketParser;
+use Carbon\Carbon;
 
 
 class VCONTicketParserTest extends TestCase {
@@ -33,16 +34,16 @@ class VCONTicketParserTest extends TestCase {
 
     public function testParseFactor() {
         $ticketIndex = 0;
-        $factorForIndex = 0.9996246086;
+        $testValue = (float)0.9996246086;
         $text = $this->ticketTexts[ $ticketIndex ];
         $ticketParser = new VCONTicketParser();
         $ticket = $ticketParser->parse( $text );
-        $this->assertEquals( $factorForIndex, $ticket->factor );
+        $this->assertEquals( $testValue, $ticket->factor );
     }
 
     public function testMissingFactor() {
         $ticketIndex = 2;
-        $factorForIndex = NULL;
+        $factorForIndex = false;
         $text = $this->ticketTexts[ $ticketIndex ];
         $ticketParser = new VCONTicketParser();
         $ticket = $ticketParser->parse( $text );
@@ -58,7 +59,6 @@ class VCONTicketParserTest extends TestCase {
         $text = $this->ticketTexts[ $ticketIndex ];
         $ticketParser = new VCONTicketParser();
         $ticket = $ticketParser->parse( $text );
-        var_dump($text);
         $this->assertEquals( $traderForIndex, $ticket->trader );
     }
 
@@ -71,8 +71,34 @@ class VCONTicketParserTest extends TestCase {
         $text = $this->ticketTexts[ $ticketIndex ];
         $ticketParser = new VCONTicketParser();
         $ticket = $ticketParser->parse( $text );
-        $ticket = $ticketParser->parse( $text );
         $this->assertEquals( $cusipForIndex, $ticket->cusip );
+    }
+
+    public function testParseQuantity() {
+        $ticketIndex = 0;
+        $testValue = '1,234,000';
+        $text = $this->ticketTexts[ $ticketIndex ];
+        $ticketParser = new VCONTicketParser();
+        $ticket = $ticketParser->parse( $text );
+        $this->assertEquals( $testValue, $ticket->quantity );
+    }
+
+    public function testParsePrincipal() {
+        $ticketIndex = 0;
+        $testValue = '12,345.67';
+        $text = $this->ticketTexts[ $ticketIndex ];
+        $ticketParser = new VCONTicketParser();
+        $ticket = $ticketParser->parse( $text );
+        $this->assertEquals( $testValue, $ticket->principalValue );
+    }
+
+    public function testParseSettleDate() {
+        $ticketIndex = 0;
+        $testValue = Carbon::parse('01/23/15');
+        $text = $this->ticketTexts[ $ticketIndex ];
+        $ticketParser = new VCONTicketParser();
+        $ticket = $ticketParser->parse( $text );
+        $this->assertEquals( $testValue, $ticket->settleDate );
     }
 
 

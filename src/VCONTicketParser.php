@@ -1,6 +1,7 @@
 <?php
 namespace DPRMC\VCON;
 use Exception;
+use Carbon\Carbon;
 
 class VCONTicketParser{
     /**
@@ -17,8 +18,9 @@ class VCONTicketParser{
 
 
     /**
-     * @param string $vconText The raw text from a VCON ticket.
+     * @param $vconText The raw text from a VCON ticket.
      * @return VCONTicket
+     * @throws Exception
      */
     public function parse($vconText){
         $this->text = $vconText; // Not sure I need to save this as a property.
@@ -27,8 +29,11 @@ class VCONTicketParser{
             $vconTicket->factor = $this->parseFactor($vconText);
             $vconTicket->trader = $this->parseTrader($vconText);
             $vconTicket->cusip = $this->parseCusip($vconText);
+            $vconTicket->quantity = $this->parseQuantity($vconText);
+            $vconTicket->principalValue = $this->parsePrincipal($vconText);
+            $vconTicket->settleDate = $this->parseSettleDate($vconText);
         } catch(Exception $e) {
-
+            throw $e;
         }
 
         return $vconTicket;
@@ -36,15 +41,15 @@ class VCONTicketParser{
 
     /**
      * @param $text
-     * @return float
-     * @throws Exception
+     * @return bool|float
      */
     protected function parseFactor($text){
         $pattern = '/Factor\s*(.*)>/';
         preg_match($pattern,$text,$matches);
 
         if(sizeof($matches) != 2 ){
-            throw new Exception("parseFactor() failed because it didn't find a factor. (Or found too many...)");
+            return false;
+            //throw new Exception("parseFactor() failed because it didn't find a factor. (Or found too many...) " . print_r($matches, true) . "\nPATTERN" . $pattern . "\n\n" . $text);
         }
 
         // http://php.net/manual/en/function.preg-match.php
@@ -84,5 +89,39 @@ class VCONTicketParser{
         // http://php.net/manual/en/function.preg-match.php
         $cusip = $matches[1];
         return (string)$cusip;
+    }
+
+    //
+    protected function parseQuantity($text){
+        $pattern = '/[\bBUYS\b|\bSELLS\b]:\s*(.*) of /';
+        preg_match($pattern,$text,$matches);
+        if(sizeof($matches) != 2 ){
+            throw new Exception("parseQuantity() failed because it didn't find a quantity. (Or found too many...)");
+        }
+        // http://php.net/manual/en/function.preg-match.php
+        $quantity = $matches[1];
+        return (string)$quantity;
+    }
+
+    protected function parsePrincipal($text){
+        $pattern = '/PRINCIPAL VAL\s*\$\s*(.*)/';
+        preg_match($pattern,$text,$matches);
+        if(sizeof($matches) != 2 ){
+            throw new Exception("parsePrincipal() failed because it didn't find a principal. (Or found too many...)");
+        }
+        // http://php.net/manual/en/function.preg-match.php
+        $principal = $matches[1];
+        return (string)$principal;
+    }
+
+    protected function parseSettleDate($text){
+        $pattern = '/SETTLE:\s*([0-9\/]*)\s*\[/';
+        preg_match($pattern,$text,$matches);
+        if(sizeof($matches) != 2 ){
+            throw new Exception("parseSettleDate() failed because it didn't find a settle date. (Or found too many...)");
+        }
+        // http://php.net/manual/en/function.preg-match.php
+        $settleDate = $matches[1];
+        return Carbon::parse($settleDate);
     }
 }

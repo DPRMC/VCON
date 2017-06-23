@@ -1,6 +1,8 @@
 <?php
 namespace DPRMC\VCON;
 
+use Carbon\Carbon;
+
 class VCONTicket{
 
     public $trader;
