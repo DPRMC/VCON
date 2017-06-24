@@ -13,12 +13,18 @@ class VCONTicket{
     public $identifier;
     public $identifierType;
 
+    /**
+     * @var bool Set to false if we find a valid CUSIP or ISIN.
+     */
+    public $identifierMissing = true;
+
     public $trader;
+    public $isin;
     public $cusip;
     public $quantity;
     public $dealName;
-//
-//
+    //
+    //
     public $price;
     public $settleDate;
     public $nextPaymentDate;
@@ -27,8 +33,8 @@ class VCONTicket{
     public $factorDate;
     public $factor;
     public $principalValue;
-//
-    public $totalFunds;
+    //
+    public $totalFunds; // Proceeds
 
 
     public function __construct() {

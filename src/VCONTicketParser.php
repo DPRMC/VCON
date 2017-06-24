@@ -28,16 +28,30 @@ class VCONTicketParser{
         $vconTicket = new VCONTicket();
         $vconTicket->rawText = $vconText;
 
-        $vconTicket->factor = $this->parseFactor($vconText);
-        if($vconTicket->cusip !== false){
-            $vconTicket->identifierType = VCONTicket::IDENTIFIER_TYPE_CUSIP;
-            $vconTicket->identifier = $vconTicket->cusip;
+        $vconTicket->isin = $this->parseIsin($vconText);
+        if($vconTicket->isin !== false){
+            $vconTicket->identifierType = VCONTicket::IDENTIFIER_TYPE_ISIN;
+            $vconTicket->identifier = $vconTicket->isin;
+            $vconTicket->identifierMissing = false;
+            $cusipWithIsinCheckDigit = substr($vconTicket->isin, 2);
+            $cusip = substr($cusipWithIsinCheckDigit,0,-1);
+            $vconTicket->cusip = $cusip;
+        } else{
+            $vconTicket->cusip = $this->parseCusipFromAnywhere($vconText);
+            if($vconTicket->cusip !== false){
+                $vconTicket->identifierType = VCONTicket::IDENTIFIER_TYPE_CUSIP;
+                $vconTicket->identifier = $vconTicket->cusip;
+                $vconTicket->identifierMissing = false;
+            }
         }
 
 
+
+        $vconTicket->factor = $this->parseFactor($vconText);
+        $vconTicket->totalFunds = $this->parseTotalFunds($vconText);
+        $vconTicket->price = $this->parsePrice($vconText);
         $vconTicket->trader = $this->parseTrader($vconText);
-        //$vconTicket->cusip = $this->parseCusip($vconText);
-        $vconTicket->cusip = $this->parseCusipFromAnywhere($vconText);
+
         $vconTicket->quantity = $this->parseQuantity($vconText);
         $vconTicket->principalValue = $this->parsePrincipal($vconText);
         $vconTicket->settleDate = $this->parseSettleDate($vconText);
@@ -106,6 +120,18 @@ class VCONTicketParser{
         return false;
     }
 
+    protected function parseIsin($text){
+        $pattern = '/ISIN:\s*([a-zA-Z0-9]{12})\s*/';
+        preg_match($pattern,$text,$matches);
+        if(sizeof($matches) != 2 ){
+            return false;
+        }
+
+        // http://php.net/manual/en/function.preg-match.php
+        $isin = $matches[1];
+        return (string)$isin;
+    }
+
 
     //
     protected function parseQuantity($text){
@@ -141,5 +167,80 @@ class VCONTicketParser{
         // http://php.net/manual/en/function.preg-match.php
         $settleDate = $matches[1];
         return Carbon::parse($settleDate);
+    }
+
+    protected function parseTotalFunds($text){
+        $pattern1Value = $this->parseTotalFundsPattern1($text);
+        if($pattern1Value !== false) return $pattern1Value;
+        $pattern2Value = $this->parseTotalFundsPattern2($text);
+        if($pattern2Value !== false) return $pattern2Value;
+        return false;
+    }
+
+    private function parseTotalFundsPattern1($text){
+        $pattern = '/TOTAL FUNDS\s*\$\s*([0-9,.]*)\s*\S/';
+        preg_match($pattern,$text,$matches);
+        if(sizeof($matches) != 2 ){
+            return false;
+        }
+        // http://php.net/manual/en/function.preg-match.php
+        $value = $matches[1];
+        return $value;
+    }
+
+    private function parseTotalFundsPattern2($text){
+        $pattern = '/Total\s*\$\s*([0-9,.]*)\s*/';
+        preg_match($pattern,$text,$matches);
+        if(sizeof($matches) != 2 ){
+            return false;
+        }
+        // http://php.net/manual/en/function.preg-match.php
+        $value = $matches[1];
+        return $value;
+    }
+
+    protected function parsePrice($text){
+        $pattern1Value = $this->parsePricePattern1($text);
+        if($pattern1Value !== false) return $pattern1Value;
+        $pattern2Value = $this->parsePricePattern2($text);
+        if($pattern2Value !== false) return $pattern2Value;
+        return false;
+    }
+
+    /**
+     * Price: 18-04
+     * @param $text
+     * @return bool
+     */
+    private function parsePricePattern1($text){
+        $pattern = '/Price:\s*([0-9-]*)/';
+        preg_match($pattern,$text,$matches);
+        if(sizeof($matches) != 2 ){
+            return false;
+        }
+        // http://php.net/manual/en/function.preg-match.php
+        $value = $matches[1];
+        $valueParts = explode('-',$value);
+        $dollars = $valueParts[0];
+        $cents = isset($valueParts[1]) ? (float)($valueParts[1] / 32) : '00';
+
+        return (float)$dollars . '.' . $cents;
+    }
+
+    /**
+     * PRICE:  14.5000000
+     * @param $text
+     * @return bool
+     */
+    private function parsePricePattern2($text){
+        $pattern = '/PRICE:\s*([0-9,.]*)/';
+        preg_match($pattern,$text,$matches);
+        if(sizeof($matches) != 2 ){
+            return false;
+        }
+        // http://php.net/manual/en/function.preg-match.php
+        $value = $matches[1];
+        $value = str_replace(',','',$value); // remove comma
+        return (float)$value;
     }
 }
